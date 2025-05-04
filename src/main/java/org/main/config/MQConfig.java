@@ -12,11 +12,18 @@ import org.springframework.context.annotation.Configuration;
 public class MQConfig {
 
     public static final String ENERGY_QUEUE = "energy.queue";
+    public static final String UPDATE_QUEUE = "update.queue";
 
     // Queue automatisch erstellen
     @Bean
     public Queue energyQueue() {
         return new Queue(ENERGY_QUEUE, true); // durable = true
+    }
+
+    // Queue automatisch erstellen
+    @Bean
+    public Queue updateQueue() {
+        return new Queue(UPDATE_QUEUE, true);
     }
 
     // JSON-Konverter für RabbitMQ
