@@ -10,6 +10,6 @@ public class CurrentPercentageListener {
     @RabbitListener(queues = MQConfig.UPDATE_QUEUE)
     public void receiveUpdateSignal(String msg) {
         System.out.println("PercentageService empfängt Trigger: " + msg);
-        // hier kommt deine Prozent-Berechnung + DB-Update
+        // TODO : Hier kommt deine Prozent-Berechnung + DB-Update
     }
 }

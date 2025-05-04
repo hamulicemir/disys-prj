@@ -10,6 +10,6 @@ public class EnergyMessageListener {
     @RabbitListener(queues = "energy.queue")
     public void receive(EnergyMessage msg) {
         System.out.println("Consumer received: " + msg.getType() + " - " + msg.getKwh() + " kWh");
-        // DB-Verarbeitung kommt später hier rein
+        // TODO : DB-Verarbeitung kommt später hier rein
     }
 }

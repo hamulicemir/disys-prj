@@ -22,7 +22,7 @@ public class UpdateMessageProducer {
         rabbitTemplate.convertAndSend(MQConfig.UPDATE_QUEUE, message);
         System.out.println("UpdateMessageProducer hat 'UPDATE_READY' gesendet.");
     }
-
+    //TODO Umschreiben, dass eine update Message geschickt wird wenn: producer/user Usage Service benutzen
     @Scheduled(fixedDelay = 5000)
     public void sendMessage() {
         sendUpdateTrigger();
