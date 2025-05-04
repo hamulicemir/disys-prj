@@ -12,6 +12,9 @@ import org.springframework.context.annotation.Configuration;
 public class MQConfig {
 
     public static final String ENERGY_QUEUE = "energy.queue";
+    public static final String UPDATE_QUEUE = "update.queue";
+
+
 
     // Queue automatisch erstellen
     @Bean
@@ -23,6 +26,12 @@ public class MQConfig {
     @Bean
     public Jackson2JsonMessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
+    }
+
+    // Queue automatisch erstellen
+    @Bean
+    public Queue updateQueue() {
+        return new Queue(UPDATE_QUEUE, true);
     }
 
     // RabbitTemplate mit JSON-Konverter
