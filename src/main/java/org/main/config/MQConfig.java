@@ -10,11 +10,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MQConfig {
-
     public static final String ENERGY_QUEUE = "energy.queue";
     public static final String UPDATE_QUEUE = "update.queue";
-
-
 
     // Queue automatisch erstellen
     @Bean

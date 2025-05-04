@@ -54,8 +54,4 @@
         <Label fx:id="gridUsedLabel" text="--" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
     </GridPane>
 
-    <test>
-        Test
-    </test>
-
 </VBox>
