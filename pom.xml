@@ -14,9 +14,16 @@
 	<groupId>at.fhtw.energy</groupId>
 	<artifactId>energy-community</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>Energy Community Project</name>
+    <packaging>pom</packaging>
+    <name>Energy Community Project</name>
+    <modules>
+        <module>energy-rest-api</module>
+		<module>GUI</module>
+		<module>CurrentPercentageService</module>
+		<module>UsageService</module>
+	</modules>
 
-	<properties>
+    <properties>
 		<java.version>21</java.version>
 		<javafx.version>21</javafx.version>
 	</properties>

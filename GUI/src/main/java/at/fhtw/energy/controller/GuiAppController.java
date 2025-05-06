@@ -1,5 +1,8 @@
-package gui.controller;
+package at.fhtw.energy.controller;
 
+import at.fhtw.energy.model.CurrentPercentageResponse;
+import at.fhtw.energy.model.HistoricalSummaryResponse;
+import at.fhtw.energy.service.EnergyApiService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -21,12 +24,19 @@ public class GuiAppController {
     @FXML private Label communityUsedLabel;
     @FXML private Label gridUsedLabel;
 
+    private final EnergyApiService apiService = new EnergyApiService();
+
     @FXML
     public void handleRefresh() {
-        // TODO: REST GET /energy/current aufrufen
-        communityPoolLabel.setText("78.54% used");  // Platzhalter
-        gridPortionLabel.setText("7.23%");         // Platzhalter
+        try {
+            CurrentPercentageResponse res = apiService.getCurrentData();
+            communityPoolLabel.setText(String.format("%.2f%% used", res.getCommunityDepleted()));
+            gridPortionLabel.setText(String.format("%.2f%%", res.getGridPortion()));
+        } catch (Exception e) {
+            showError("Fehler beim Laden der aktuellen Daten: " + e.getMessage());
+        }
     }
+
     @FXML
     public void handleShowData() {
         try {
@@ -38,12 +48,14 @@ public class GuiAppController {
             LocalDateTime start = LocalDateTime.of(startDate, startTime);
             LocalDateTime end = LocalDateTime.of(endDate, endTime);
 
-            // TODO: REST GET /energy/historical?start=...&end=... verwenden
-            communityProducedLabel.setText("143.024 kWh");
-            communityUsedLabel.setText("130.101 kWh");
-            gridUsedLabel.setText("14.75 kWh");
+            HistoricalSummaryResponse res = apiService.getHistoricalData(start, end);
+
+            communityProducedLabel.setText(String.format("%.3f kWh", res.getCommunityProduced()));
+            communityUsedLabel.setText(String.format("%.3f kWh", res.getCommunityUsed()));
+            gridUsedLabel.setText(String.format("%.2f kWh", res.getGridUsed()));
+
         } catch (Exception e) {
-            showError("Invalid date or time format.");
+            showError("Invalid date/time or REST error: " + e.getMessage());
         }
     }
 

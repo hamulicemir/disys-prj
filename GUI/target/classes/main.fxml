@@ -7,7 +7,7 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="gui.controller.GuiAppController"
+      fx:controller="at.fhtw.energy.controller.GuiAppController"
       spacing="20"
       alignment="TOP_CENTER">
 

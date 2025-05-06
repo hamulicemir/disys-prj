@@ -1,4 +1,4 @@
-package gui;
+package at.fhtw.energy;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class GuiApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main.fxml"));
         Scene scene = new Scene(loader.load());
         primaryStage.setTitle("Energy Community Dashboard");
         primaryStage.setScene(scene);
