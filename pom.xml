@@ -21,6 +21,8 @@
 		<module>GUI</module>
 		<module>CurrentPercentageService</module>
 		<module>UsageService</module>
+		<module>community-energy-producer</module>
+		<module>community-energy-user</module>
 	</modules>
 
     <properties>

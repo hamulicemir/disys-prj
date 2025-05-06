@@ -1,4 +1,4 @@
-package org.main.percentageservice;
+package at.fhtw.energy.listener;
 
 import org.main.config.MQConfig;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

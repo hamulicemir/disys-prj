@@ -1,4 +1,4 @@
-package org.main.producerservice;
+package at.fhtw.energy.producer;
 
 import org.main.model.EnergyMessage;
 import org.main.producerservice.weatherService.WeatherService;

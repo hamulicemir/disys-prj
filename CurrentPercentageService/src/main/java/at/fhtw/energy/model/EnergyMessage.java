@@ -1,4 +1,4 @@
-package org.main.model;
+package at.fhtw.energy.model;
 
 import java.time.LocalDateTime;
 

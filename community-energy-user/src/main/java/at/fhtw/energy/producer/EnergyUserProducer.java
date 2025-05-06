@@ -1,4 +1,4 @@
-package org.main.userservice;
+package at.fhtw.energy.producer;
 
 import org.main.config.MQConfig;
 import org.main.model.EnergyMessage;

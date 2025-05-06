@@ -1,4 +1,4 @@
-package org.main.producerservice.weatherService;
+package at.fhtw.energy.service;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package org.main.userservice;
+package at.fhtw.energy.listener;
 
 import org.main.model.EnergyMessage;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
