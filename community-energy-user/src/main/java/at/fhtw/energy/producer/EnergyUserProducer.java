@@ -1,7 +1,7 @@
 package at.fhtw.energy.producer;
 
-import org.main.config.MQConfig;
-import org.main.model.EnergyMessage;
+import at.fhtw.energy.config.MQConfig;
+import at.fhtw.energy.model.EnergyMessage;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;

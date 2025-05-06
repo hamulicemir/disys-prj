@@ -1,7 +1,7 @@
 package at.fhtw.energy.producer;
 
-import org.main.model.EnergyMessage;
-import org.main.producerservice.weatherService.WeatherService;
+import at.fhtw.energy.model.EnergyMessage;
+import at.fhtw.energy.service.WeatherService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

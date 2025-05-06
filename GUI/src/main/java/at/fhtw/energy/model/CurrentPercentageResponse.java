@@ -1,5 +1,9 @@
 package at.fhtw.energy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CurrentPercentageResponse {
     private double communityDepleted;
     private double gridPortion;

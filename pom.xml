@@ -19,8 +19,8 @@
     <modules>
         <module>energy-rest-api</module>
 		<module>GUI</module>
-		<module>CurrentPercentageService</module>
-		<module>UsageService</module>
+		<module>current-percentage-service</module>
+		<module>usage-service</module>
 		<module>community-energy-producer</module>
 		<module>community-energy-user</module>
 	</modules>

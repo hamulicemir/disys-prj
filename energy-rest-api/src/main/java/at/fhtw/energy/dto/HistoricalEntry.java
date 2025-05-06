@@ -1,39 +1,44 @@
 package at.fhtw.energy.dto;
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 
 public class HistoricalEntry {
-    private LocalDate date;
-    private double production;
-    private double usage;
+    private LocalDateTime timestamp;
+    private double communityProduced;
+    private double communityUsed;
+    private double gridUsed;
 
-    public HistoricalEntry(LocalDate date, double production, double usage) {
-        this.date = date;
-        this.production = production;
-        this.usage = usage;
+    public HistoricalEntry() {}
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public double getCommunityProduced() {
+        return communityProduced;
     }
 
-    public double getProduction() {
-        return production;
+    public void setCommunityProduced(double communityProduced) {
+        this.communityProduced = communityProduced;
     }
 
-    public void setProduction(double production) {
-        this.production = production;
+    public double getCommunityUsed() {
+        return communityUsed;
     }
 
-    public double getUsage() {
-        return usage;
+    public void setCommunityUsed(double communityUsed) {
+        this.communityUsed = communityUsed;
     }
 
-    public void setUsage(double usage) {
-        this.usage = usage;
+    public double getGridUsed() {
+        return gridUsed;
+    }
+
+    public void setGridUsed(double gridUsed) {
+        this.gridUsed = gridUsed;
     }
 }
-

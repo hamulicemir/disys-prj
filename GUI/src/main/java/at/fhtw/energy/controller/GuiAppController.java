@@ -17,9 +17,6 @@ public class GuiAppController {
 
     @FXML private DatePicker startDatePicker;
     @FXML private DatePicker endDatePicker;
-    @FXML private TextField startTimeField;
-    @FXML private TextField endTimeField;
-
     @FXML private Label communityProducedLabel;
     @FXML private Label communityUsedLabel;
     @FXML private Label gridUsedLabel;
@@ -42,11 +39,9 @@ public class GuiAppController {
         try {
             LocalDate startDate = startDatePicker.getValue();
             LocalDate endDate = endDatePicker.getValue();
-            LocalTime startTime = LocalTime.parse(startTimeField.getText());
-            LocalTime endTime = LocalTime.parse(endTimeField.getText());
 
-            LocalDateTime start = LocalDateTime.of(startDate, startTime);
-            LocalDateTime end = LocalDateTime.of(endDate, endTime);
+            LocalDateTime start = LocalDateTime.of(startDate, LocalTime.MIN);
+            LocalDateTime end = LocalDateTime.of(endDate, LocalTime.MIN);
 
             HistoricalSummaryResponse res = apiService.getHistoricalData(start, end);
 

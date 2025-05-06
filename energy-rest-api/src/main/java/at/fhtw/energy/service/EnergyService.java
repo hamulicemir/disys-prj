@@ -1,27 +1,43 @@
 package at.fhtw.energy.service;
 
+import at.fhtw.energy.dto.HistoricalEntry;
 import at.fhtw.energy.dto.CurrentEnergyResponse;
-import  at.fhtw.energy.dto.HistoricalEntry;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EnergyService {
 
+    private final ObjectMapper mapper = new ObjectMapper();
+
     public CurrentEnergyResponse getCurrentPercentage() {
-        return new CurrentEnergyResponse(62.7); // Dummy-Prozentwert
+        return new CurrentEnergyResponse(78.54, 7.23); // Platzhalter, alternativ: aus JSON laden
     }
 
-    public List<HistoricalEntry> getHistoricalData(LocalDate start, LocalDate end) {
-        List<HistoricalEntry> list = new ArrayList<>();
-        LocalDate date = start;
-        while (!date.isAfter(end)) {
-            list.add(new HistoricalEntry(date, Math.random() * 5, Math.random() * 4));
-            date = date.plusDays(1);
+    public List<HistoricalEntry> getHistoricalData(LocalDateTime start, LocalDateTime end) {
+        System.out.println("Lade JSON aus Pfad: data/historical.json");
+        try {
+            InputStream is = getClass().getClassLoader().getResourceAsStream("data/historical.json");
+            if (is == null) {
+                throw new RuntimeException("Datei data/historical.json nicht gefunden!");
+            }
+            List<HistoricalEntry> allEntries = mapper.readValue(is, new TypeReference<>() {});
+
+            return allEntries.stream()
+                    .filter(entry -> entry.getTimestamp() != null &&
+                            !entry.getTimestamp().isBefore(start) &&
+                            !entry.getTimestamp().isAfter(end))
+                    .collect(Collectors.toList());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Fehler beim Lesen von historical.json");
         }
-        return list;
     }
 }
