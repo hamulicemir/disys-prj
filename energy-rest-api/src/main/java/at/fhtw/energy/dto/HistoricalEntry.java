@@ -1,4 +1,5 @@
 package at.fhtw.energy.dto;
+import at.fhtw.energy.*;
 
 import java.time.LocalDateTime;
 

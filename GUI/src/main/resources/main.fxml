@@ -1,57 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="at.fhtw.energy.controller.GuiAppController"
-      spacing="20"
-      alignment="TOP_CENTER">
+<VBox alignment="TOP_CENTER" spacing="20" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhtw.energy.controller.GuiAppController">
 
     <padding>
-        <Insets top="25" right="25" bottom="25" left="25"/>
+        <Insets bottom="25" left="25" right="25" top="25" />
     </padding>
 
     <!-- Titel -->
-    <Label text="Energy Community Dashboard"
-           style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+    <Label style="-fx-font-size: 22px; -fx-font-weight: bold;" text="Energy Community Dashboard" />
 
     <!-- Live-Daten Anzeige -->
     <GridPane hgap="10" vgap="5">
-        <Label text="Community Pool:"/>
-        <Label fx:id="communityPoolLabel" text="--" GridPane.columnIndex="1"/>
-        <Label text="Grid Portion:" GridPane.rowIndex="1"/>
-        <Label fx:id="gridPortionLabel" text="--" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label text="Community Pool:" />
+        <Label fx:id="communityPoolLabel" text="--" GridPane.columnIndex="1" />
+        <Label text="Grid Portion:" GridPane.rowIndex="1" />
+        <Label fx:id="gridPortionLabel" text="--" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
     </GridPane>
 
-    <Button text="Refresh Current Data" onAction="#handleRefresh" maxWidth="200"/>
+    <Button maxWidth="200" onAction="#handleRefresh" text="Refresh Current Data" />
 
     <!-- Historische Abfrage -->
     <GridPane hgap="10" vgap="10">
-        <Label text="Start Date:"/>
-        <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1"/>
-        <Label text="Start Time:" GridPane.rowIndex="1"/>
-        <TextField fx:id="startTimeField" promptText="HH:mm" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label text="Start Date:" />
+        <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" />
 
-        <Label text="End Date:" GridPane.rowIndex="2"/>
-        <DatePicker fx:id="endDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-        <Label text="End Time:" GridPane.rowIndex="3"/>
-        <TextField fx:id="endTimeField" promptText="HH:mm" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Label text="End Date:" GridPane.rowIndex="2" />
+        <DatePicker fx:id="endDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
     </GridPane>
 
-    <Button text="Show Historical Data" onAction="#handleShowData" maxWidth="200"/>
+    <Button maxWidth="200" onAction="#handleShowData" text="Show Historical Data" />
 
     <!-- Ergebnis-Anzeige -->
     <GridPane hgap="10" vgap="5">
-        <Label text="Community Produced:"/>
-        <Label fx:id="communityProducedLabel" text="--" GridPane.columnIndex="1"/>
-        <Label text="Community Used:" GridPane.rowIndex="1"/>
-        <Label fx:id="communityUsedLabel" text="--" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <Label text="Grid Used:" GridPane.rowIndex="2"/>
-        <Label fx:id="gridUsedLabel" text="--" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Label text="Community Produced:" />
+        <Label fx:id="communityProducedLabel" text="--" GridPane.columnIndex="1" />
+        <Label text="Community Used:" GridPane.rowIndex="1" />
+        <Label fx:id="communityUsedLabel" text="--" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="Grid Used:" GridPane.rowIndex="2" />
+        <Label fx:id="gridUsedLabel" text="--" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
     </GridPane>
 
 </VBox>

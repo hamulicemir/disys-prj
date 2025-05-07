@@ -1,6 +1,7 @@
 package at.fhtw.energy.controller;
 
 import at.fhtw.energy.model.CurrentPercentageResponse;
+import at.fhtw.energy.model.HistoricalEntry;
 import at.fhtw.energy.model.HistoricalSummaryResponse;
 import at.fhtw.energy.service.EnergyApiService;
 import javafx.fxml.FXML;
@@ -9,6 +10,8 @@ import javafx.scene.control.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.List;
 
 public class GuiAppController {
 
@@ -41,18 +44,24 @@ public class GuiAppController {
             LocalDate endDate = endDatePicker.getValue();
 
             LocalDateTime start = LocalDateTime.of(startDate, LocalTime.MIN);
-            LocalDateTime end = LocalDateTime.of(endDate, LocalTime.MIN);
+            LocalDateTime end = LocalDateTime.of(endDate, LocalTime.MAX);
 
-            HistoricalSummaryResponse res = apiService.getHistoricalData(start, end);
+            List<HistoricalEntry> entries = apiService.getHistoricalData(start, end);
 
-            communityProducedLabel.setText(String.format("%.3f kWh", res.getCommunityProduced()));
-            communityUsedLabel.setText(String.format("%.3f kWh", res.getCommunityUsed()));
-            gridUsedLabel.setText(String.format("%.2f kWh", res.getGridUsed()));
+            double totalProduced = entries.stream().mapToDouble(HistoricalEntry::getCommunityProduced).sum();
+            double totalUsed = entries.stream().mapToDouble(HistoricalEntry::getCommunityUsed).sum();
+            double totalGrid = entries.stream().mapToDouble(HistoricalEntry::getGridUsed).sum();
+
+            communityProducedLabel.setText(String.format("%.3f kWh", totalProduced));
+            communityUsedLabel.setText(String.format("%.3f kWh", totalUsed));
+            gridUsedLabel.setText(String.format("%.2f kWh", totalGrid));
 
         } catch (Exception e) {
+            e.printStackTrace();
             showError("Invalid date/time or REST error: " + e.getMessage());
         }
     }
+
 
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

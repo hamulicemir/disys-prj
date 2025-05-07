@@ -11,26 +11,24 @@ import java.util.List;
 @RestController
 @RequestMapping("/energy")
 public class EnergyController {
+    private final EnergyService energyService;
 
+    public EnergyController(EnergyService energyService) {
+        this.energyService = energyService;
+    }
 
-private final EnergyService energyService;
+    @GetMapping("/current")
+    public CurrentEnergyResponse getCurrent() {
+        return energyService.getCurrentPercentage();
+    }
 
-public EnergyController(EnergyService energyService) {
-    this.energyService = energyService;
-}
+    @GetMapping("/historical")
+    public List<HistoricalEntry> getHistorical(
+            @RequestParam String start,
+            @RequestParam String end) {
 
-@GetMapping("/current")
-public CurrentEnergyResponse getCurrent() {
-    return energyService.getCurrentPercentage();
-}
-
-@GetMapping("/historical")
-public List<HistoricalEntry> getHistorical(
-        @RequestParam String start,
-        @RequestParam String end) {
-
-    LocalDateTime startDate = LocalDateTime.parse(start);
-    LocalDateTime endDate = LocalDateTime.parse(end);
-    return energyService.getHistoricalData(startDate, endDate);
-}
+        LocalDateTime startDate = LocalDateTime.parse(start);
+        LocalDateTime endDate = LocalDateTime.parse(end);
+        return energyService.getHistoricalData(startDate, endDate);
+    }
 }

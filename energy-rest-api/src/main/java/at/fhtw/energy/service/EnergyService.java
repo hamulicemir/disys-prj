@@ -4,6 +4,8 @@ import at.fhtw.energy.dto.HistoricalEntry;
 import at.fhtw.energy.dto.CurrentEnergyResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
@@ -14,7 +16,14 @@ import java.util.stream.Collectors;
 @Service
 public class EnergyService {
 
-    private final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper;
+
+    public EnergyService() {
+        mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+    }
+
 
     public CurrentEnergyResponse getCurrentPercentage() {
         return new CurrentEnergyResponse(78.54, 7.23); // Platzhalter, alternativ: aus JSON laden
@@ -41,3 +50,5 @@ public class EnergyService {
         }
     }
 }
+
+
