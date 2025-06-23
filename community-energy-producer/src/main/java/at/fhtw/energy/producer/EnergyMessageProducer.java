@@ -17,7 +17,7 @@ public class EnergyMessageProducer {
     private final Random random = new Random();
 
     @Autowired
-    private WeatherService weatherService;
+    public WeatherService weatherService;
 
     public EnergyMessageProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
@@ -31,7 +31,7 @@ public class EnergyMessageProducer {
         EnergyMessage msg = new EnergyMessage();
         msg.setType("PRODUCER");
         msg.setAssociation("COMMUNITY");
-        msg.setKwh(0.002 + random.nextDouble() * 0.003);
+        msg.setKwh(kwh);
         msg.setDatetime(LocalDateTime.now());
 
         rabbitTemplate.convertAndSend("energy.queue", msg);
