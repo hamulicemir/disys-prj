@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = "at.fhtw.energy.repository")
+
 @EnableScheduling
 public class EnergyRestApiApplication {
     public static void main(String[] args) {
