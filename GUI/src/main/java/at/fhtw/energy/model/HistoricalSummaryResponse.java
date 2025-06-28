@@ -1,5 +1,8 @@
 package at.fhtw.energy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class HistoricalSummaryResponse {
 
     private double communityProduced;
@@ -7,6 +10,12 @@ public class HistoricalSummaryResponse {
     private double gridUsed;
 
     public HistoricalSummaryResponse() {}
+
+    public HistoricalSummaryResponse(double communityProduced, double communityUsed, double gridUsed) {
+        this.communityProduced = communityProduced;
+        this.communityUsed = communityUsed;
+        this.gridUsed = gridUsed;
+    }
 
     public double getCommunityProduced() {
         return communityProduced;
