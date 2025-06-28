@@ -28,11 +28,13 @@ public class EnergyController {
     }
 
 
-
-    @GetMapping("/historical")
-    public HistoricalSummaryResponse getHistoricalSummary() {
-        return energyService.getHistoricalEntriesSummary();
-    }
-
+@GetMapping("/historical")
+public HistoricalSummaryResponse getHistoricalSummary(
+        @RequestParam String start,
+        @RequestParam String end) {
+    LocalDateTime startTime = LocalDateTime.parse(start);
+    LocalDateTime endTime = LocalDateTime.parse(end);
+    return energyService.getHistoricalEntriesSummary(startTime, endTime);
+}
 
 }

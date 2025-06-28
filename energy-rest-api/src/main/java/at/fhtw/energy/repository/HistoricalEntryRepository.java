@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface HistoricalEntryRepository extends JpaRepository<HistoricalEntryEntity, Long> {
-    // HistoricalEntryRepository.java
-    List<HistoricalEntryEntity> findAll();
+// in HistoricalEntryRepository.java
+    List<HistoricalEntryEntity> findByHourBetween(LocalDateTime start, LocalDateTime end);
 }

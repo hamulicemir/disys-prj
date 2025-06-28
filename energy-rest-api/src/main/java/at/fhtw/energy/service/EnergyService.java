@@ -51,19 +51,19 @@ public class EnergyService {
 //    }
 
 
-    public HistoricalSummaryResponse getHistoricalEntriesSummary() {
-        List<HistoricalEntryEntity> allEntries = historicalEntryRepository.findAll();
-        double sumProduced = 0;
-        double sumUsed = 0;
-        double sumGrid = 0;
+  public HistoricalSummaryResponse getHistoricalEntriesSummary(LocalDateTime start, LocalDateTime end) {
+      List<HistoricalEntryEntity> entries = historicalEntryRepository.findByHourBetween(start, end);
+      double sumProduced = 0;
+      double sumUsed = 0;
+      double sumGrid = 0;
 
-        for (HistoricalEntryEntity entry : allEntries) {
-            sumProduced += entry.getCommunityProduced();
-            sumUsed += entry.getCommunityUsed();
-            sumGrid += entry.getGridUsed();
-        }
+      for (HistoricalEntryEntity entry : entries) {
+          sumProduced += entry.getCommunityProduced();
+          sumUsed += entry.getCommunityUsed();
+          sumGrid += entry.getGridUsed();
+      }
 
-        return new HistoricalSummaryResponse(sumProduced, sumUsed, sumGrid);
-    }
+      return new HistoricalSummaryResponse(sumProduced, sumUsed, sumGrid);
+  }
 
 }
