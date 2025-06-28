@@ -1,8 +1,10 @@
 package at.fhtw.energy.service;
 
-import at.fhtw.energy.dto.HistoricalEntry;
 import at.fhtw.energy.dto.CurrentEnergyResponse;
+import at.fhtw.energy.dto.HistoricalEntry;
+import at.fhtw.energy.entity.CurrentPercentageEntity;
 import at.fhtw.energy.entity.HistoricalEntryEntity;
+import at.fhtw.energy.repository.CurrentPercentageRepository;
 import at.fhtw.energy.repository.HistoricalEntryRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,36 +15,48 @@ import java.util.stream.Collectors;
 @Service
 public class EnergyService {
 
-    private final HistoricalEntryRepository repository;
+    private final CurrentPercentageRepository currentPercentageRepository;
+    private final HistoricalEntryRepository historicalEntryRepository;
 
-    public EnergyService(HistoricalEntryRepository repository) {
-        this.repository = repository;
+    public EnergyService(CurrentPercentageRepository currentPercentageRepository, HistoricalEntryRepository historicalEntryRepository) {
+        this.currentPercentageRepository = currentPercentageRepository;
+        this.historicalEntryRepository = historicalEntryRepository;
     }
 
     public CurrentEnergyResponse getCurrentPercentage() {
-        // Beispiel: Letzter Eintrag der aktuellen Stunde
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime start = now.withMinute(0).withSecond(0).withNano(0);
-        LocalDateTime end = start.plusHours(1);
-        List<HistoricalEntryEntity> entries = repository.findByTimestampBetween(start, end);
-        if (entries.isEmpty()) {
+        CurrentPercentageEntity last = currentPercentageRepository.findTopByOrderByHourDesc();
+        if (last == null) {
             return new CurrentEnergyResponse(0, 0);
         }
-        HistoricalEntryEntity last = entries.get(entries.size() - 1);
         return new CurrentEnergyResponse(last.getCommunityUsed(), last.getGridUsed());
     }
 
-    public List<HistoricalEntry> getHistoricalData(LocalDateTime start, LocalDateTime end) {
-        return repository.findByTimestampBetween(start, end)
-                .stream()
-                .map(e -> {
+
+    public HistoricalEntry getLatestHistoricalEntry(String start, String end) {
+        LocalDateTime startTime = LocalDateTime.parse(start);
+        LocalDateTime endTime = LocalDateTime.parse(end);
+        return historicalEntryRepository.findAll().stream()
+                .filter(e -> !e.getHour().isBefore(startTime) && !e.getHour().isAfter(endTime))
+                .max((e1, e2) -> e1.getHour().compareTo(e2.getHour()))
+                .map(entity -> {
                     HistoricalEntry dto = new HistoricalEntry();
-                    dto.setTimestamp(e.getTimestamp());
-                    dto.setCommunityProduced(e.getCommunityProduced());
-                    dto.setCommunityUsed(e.getCommunityUsed());
-                    dto.setGridUsed(e.getGridUsed());
+                    dto.setTimestamp(entity.getHour());
+                    dto.setCommunityUsed(entity.getCommunityUsed());
+                    dto.setGridUsed(entity.getGridUsed());
+                    // dto.setCommunityProduced(entity.getCommunityProduced());
                     return dto;
                 })
-                .collect(Collectors.toList());
+                .orElse(null);
     }
+
+
+    public CurrentEnergyResponse getHistoricalEntries() {
+        var last = historicalEntryRepository.findTopByOrderByHourDesc();
+        if (last == null) {
+            return new CurrentEnergyResponse(0, 0);
+        }
+        return new CurrentEnergyResponse(last.getCommunityUsed(), last.getGridUsed());
+    }
+
+
 }

@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface HistoricalEntryRepository extends JpaRepository<HistoricalEntryEntity, Long> {
-    List<HistoricalEntryEntity> findByTimestampBetween(LocalDateTime start, LocalDateTime end);
+    HistoricalEntryEntity findTopByOrderByHourDesc();
+
 }

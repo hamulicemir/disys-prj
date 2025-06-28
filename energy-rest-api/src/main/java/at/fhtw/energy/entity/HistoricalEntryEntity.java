@@ -4,43 +4,34 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "historical_data")
+@Table(name = "usage_hourly")
 public class HistoricalEntryEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private LocalDateTime timestamp;
+    private LocalDateTime hour;
+    @Column(name = "community_produced")
     private double communityProduced;
+    @Column(name = "community_used")
     private double communityUsed;
+    @Column(name = "grid_used")
     private double gridUsed;
 
     public HistoricalEntryEntity() {
         // Wichtig für JPA
     }
 
-    public HistoricalEntryEntity(LocalDateTime timestamp, double communityProduced, double communityUsed, double gridUsed) {
-        this.timestamp = timestamp;
+    public HistoricalEntryEntity(LocalDateTime hour, double communityProduced, double communityUsed, double gridUsed) {
+        this.hour = hour;
         this.communityProduced = communityProduced;
         this.communityUsed = communityUsed;
         this.gridUsed = gridUsed;
     }
 
-    public Long getId() {
-        return id;
+    public LocalDateTime getHour() {
+        return hour;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
+    public void setHour(LocalDateTime hour) {
+        this.hour = hour;
     }
 
     public double getCommunityProduced() {
