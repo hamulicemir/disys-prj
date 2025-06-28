@@ -4,6 +4,7 @@ services:
     ports:
       - '5432:5432'
     environment:
+      - POSTGRES_DB=energydb
       - POSTGRES_USER=disysuser
       - POSTGRES_PASSWORD=disyspw
   
