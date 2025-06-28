@@ -26,7 +26,7 @@ public class EnergyService {
         LocalDateTime end = start.plusHours(1);
         List<HistoricalEntryEntity> entries = repository.findByTimestampBetween(start, end);
         if (entries.isEmpty()) {
-            return new CurrentEnergyResponse(1, 0);
+            return new CurrentEnergyResponse(0, 0);
         }
         HistoricalEntryEntity last = entries.get(entries.size() - 1);
         return new CurrentEnergyResponse(last.getCommunityUsed(), last.getGridUsed());
