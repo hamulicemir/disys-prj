@@ -25,7 +25,8 @@ public class CurrentPercentageListener {
         }
         CurrentPercentage cp = new CurrentPercentage();
         cp.setHour(usageHour.getHour());
-        cp.setPercentage(percentage);
+
+        repository.save(cp);
 
     }
 }
