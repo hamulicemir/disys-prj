@@ -2,6 +2,7 @@ package at.fhtw.energy.controller;
 
 import at.fhtw.energy.dto.CurrentEnergyResponse;
 import at.fhtw.energy.dto.HistoricalEntry;
+import at.fhtw.energy.dto.HistoricalSummaryResponse;
 import at.fhtw.energy.service.EnergyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,14 +28,11 @@ public class EnergyController {
     }
 
 
+
     @GetMapping("/historical")
-    public HistoricalEntry getHistorical(
-            @RequestParam String start,
-            @RequestParam String end) {
-        HistoricalEntry entry = energyService.getLatestHistoricalEntry(start, end);
-        if (entry == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No historical entry found for given range");
-        }
-        return entry;
+    public HistoricalSummaryResponse getHistoricalSummary() {
+        return energyService.getHistoricalEntriesSummary();
     }
+
+
 }

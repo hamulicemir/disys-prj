@@ -2,6 +2,7 @@ package at.fhtw.energy.service;
 
 import at.fhtw.energy.dto.CurrentEnergyResponse;
 import at.fhtw.energy.dto.HistoricalEntry;
+import at.fhtw.energy.dto.HistoricalSummaryResponse;
 import at.fhtw.energy.entity.CurrentPercentageEntity;
 import at.fhtw.energy.entity.HistoricalEntryEntity;
 import at.fhtw.energy.repository.CurrentPercentageRepository;
@@ -32,31 +33,37 @@ public class EnergyService {
     }
 
 
-    public HistoricalEntry getLatestHistoricalEntry(String start, String end) {
-        LocalDateTime startTime = LocalDateTime.parse(start);
-        LocalDateTime endTime = LocalDateTime.parse(end);
-        return historicalEntryRepository.findAll().stream()
-                .filter(e -> !e.getHour().isBefore(startTime) && !e.getHour().isAfter(endTime))
-                .max((e1, e2) -> e1.getHour().compareTo(e2.getHour()))
-                .map(entity -> {
-                    HistoricalEntry dto = new HistoricalEntry();
-                    dto.setTimestamp(entity.getHour());
-                    dto.setCommunityUsed(entity.getCommunityUsed());
-                    dto.setGridUsed(entity.getGridUsed());
-                    // dto.setCommunityProduced(entity.getCommunityProduced());
-                    return dto;
-                })
-                .orElse(null);
-    }
+//    public HistoricalEntry getLatestHistoricalEntry(String start, String end) {
+//        LocalDateTime startTime = LocalDateTime.parse(start);
+//        LocalDateTime endTime = LocalDateTime.parse(end);
+//        return historicalEntryRepository.findAll().stream()
+//                .filter(e -> !e.getHour().isBefore(startTime) && !e.getHour().isAfter(endTime))
+//                .max((e1, e2) -> e1.getHour().compareTo(e2.getHour()))
+//                .map(entity -> {
+//                    HistoricalEntry dto = new HistoricalEntry();
+//                    dto.setTimestamp(entity.getHour());
+//                    dto.setCommunityUsed(entity.getCommunityUsed());
+//                    dto.setGridUsed(entity.getGridUsed());
+//                    // dto.setCommunityProduced(entity.getCommunityProduced());
+//                    return dto;
+//                })
+//                .orElse(null);
+//    }
 
 
-    public CurrentEnergyResponse getHistoricalEntries() {
-        var last = historicalEntryRepository.findTopByOrderByHourDesc();
-        if (last == null) {
-            return new CurrentEnergyResponse(0, 0);
+    public HistoricalSummaryResponse getHistoricalEntriesSummary() {
+        List<HistoricalEntryEntity> allEntries = historicalEntryRepository.findAll();
+        double sumProduced = 0;
+        double sumUsed = 0;
+        double sumGrid = 0;
+
+        for (HistoricalEntryEntity entry : allEntries) {
+            sumProduced += entry.getCommunityProduced();
+            sumUsed += entry.getCommunityUsed();
+            sumGrid += entry.getGridUsed();
         }
-        return new CurrentEnergyResponse(last.getCommunityUsed(), last.getGridUsed());
-    }
 
+        return new HistoricalSummaryResponse(sumProduced, sumUsed, sumGrid);
+    }
 
 }

@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface HistoricalEntryRepository extends JpaRepository<HistoricalEntryEntity, Long> {
-    HistoricalEntryEntity findTopByOrderByHourDesc();
-
+    // HistoricalEntryRepository.java
+    List<HistoricalEntryEntity> findAll();
 }

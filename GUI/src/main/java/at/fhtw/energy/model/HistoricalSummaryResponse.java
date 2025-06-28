@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HistoricalSummaryResponse {
 
-    private double communityProduced = 22;
-    private double communityUsed= 33;
+    private double communityProduced;
+    private double communityUsed;
     private double gridUsed;
 
     public HistoricalSummaryResponse() {}

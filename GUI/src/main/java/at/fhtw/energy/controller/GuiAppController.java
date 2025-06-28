@@ -54,6 +54,8 @@ public class GuiAppController {
         }
     }
 
+
+
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Input Error");
