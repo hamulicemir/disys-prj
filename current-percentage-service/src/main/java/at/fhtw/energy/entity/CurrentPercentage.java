@@ -1,14 +1,12 @@
 package at.fhtw.energy.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
-    import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 
     @Entity
     public class CurrentPercentage {
         @Id
         private LocalDateTime hour;
-        private double percentage;
         private double communityDepleted;
         private double gridPortion;
 
@@ -22,10 +20,4 @@ import jakarta.persistence.Id;
         public double getGridPortion() { return gridPortion; }
         public void setGridPortion(double gridPortion) { this.gridPortion = gridPortion; }
 
-        public void setPercentage(double percentage) {
-            this.percentage = percentage;
-        }
-        public double getPercentage() {
-            return percentage;
-        }
     }

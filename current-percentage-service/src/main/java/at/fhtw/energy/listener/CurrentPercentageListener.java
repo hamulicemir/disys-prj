@@ -19,13 +19,14 @@ public class CurrentPercentageListener {
     @Transactional
     @RabbitListener(queues = "update.queue")
     public void receive(UsageHour usageHour) {
-        double percentage = 0;
-        if (usageHour.getCommunityUsed() > 0) {
-            percentage = (usageHour.getCommunityProduced() / usageHour.getCommunityUsed()) * 100;
-        }
+        double communityDepleted = usageHour.getCommunityUsed();
+        double gridPortion = usageHour.getGridUsed();
+
         CurrentPercentage cp = new CurrentPercentage();
         cp.setHour(usageHour.getHour());
-        cp.setPercentage(percentage);
+        cp.setCommunityDepleted(communityDepleted);
+        cp.setGridPortion(gridPortion);
 
-    }
+        repository.save(cp);
+}
 }
