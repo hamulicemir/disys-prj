@@ -1,12 +1,23 @@
 package at.fhtw.energy.model;
+import at.fhtw.energy.*;
 
-public class HistoricalSummaryResponse {
+import java.time.LocalDateTime;
 
+public class HistoricalEntry {
+    private LocalDateTime timestamp;
     private double communityProduced;
     private double communityUsed;
     private double gridUsed;
 
-    public HistoricalSummaryResponse() {}
+    public HistoricalEntry() {}
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public double getCommunityProduced() {
         return communityProduced;
