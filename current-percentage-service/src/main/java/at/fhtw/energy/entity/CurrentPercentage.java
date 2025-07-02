@@ -19,5 +19,4 @@ import java.time.LocalDateTime;
 
         public double getGridPortion() { return gridPortion; }
         public void setGridPortion(double gridPortion) { this.gridPortion = gridPortion; }
-
     }
