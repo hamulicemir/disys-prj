@@ -1,4 +1,4 @@
-// usage-service/src/main/java/at/fhtw/energy/listener/EnergyMessageListener.java
+
     package at.fhtw.energy.listener;
 
     import at.fhtw.energy.model.EnergyMessage;

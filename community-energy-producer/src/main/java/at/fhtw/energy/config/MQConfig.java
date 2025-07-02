@@ -15,7 +15,7 @@ public class MQConfig {
     // Queue automatisch erstellen
     @Bean
     public Queue energyQueue() {
-        return new Queue(ENERGY_QUEUE, true); // durable = true
+        return new Queue(ENERGY_QUEUE, true);
     }
 
     // JSON-Konverter für RabbitMQ

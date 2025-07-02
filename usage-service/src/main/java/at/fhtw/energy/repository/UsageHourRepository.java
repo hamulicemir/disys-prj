@@ -1,4 +1,4 @@
-// usage-service/src/main/java/at/fhtw/energy/repository/UsageHourRepository.java
+
 package at.fhtw.energy.repository;
 
 import at.fhtw.energy.model.UsageHour;

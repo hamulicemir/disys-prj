@@ -24,7 +24,7 @@ public class WeatherService {
             return calculateProduction(isDay, condition, cloud);
 
         } catch (Exception e) {
-            System.err.println("⚠️ Fehler beim Wetterabruf: " + e.getMessage());
+            System.err.println(" Fehler beim Wetterabruf: " + e.getMessage());
             return 0.001; // fallback Wert
         }
     }
@@ -36,13 +36,13 @@ public class WeatherService {
 
         double base = 0.002;
 
-        if (condition.toLowerCase().contains("Clear")) {
+        if (condition.toLowerCase().contains("clear")) {
             return base * 1.8;
-        } else if (condition.toLowerCase().contains("Partly cloudy")) {
+        } else if (condition.toLowerCase().contains("partly cloudy")) {
             return base * 1.2;
-        } else if (condition.toLowerCase().contains("Cloudy")) {
+        } else if (condition.toLowerCase().contains("cloudy")) {
             return base * 0.7;
-        } else if (condition.toLowerCase().contains("Rainy") || cloudPercentage > 90) {
+        } else if (condition.toLowerCase().contains("rainy") || cloudPercentage > 90) {
             return base * 0.3;
         } else {
             return base;

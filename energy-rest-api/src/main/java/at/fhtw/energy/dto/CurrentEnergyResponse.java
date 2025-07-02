@@ -9,7 +9,7 @@ public class CurrentEnergyResponse {
     private double gridPortion;
 
     public CurrentEnergyResponse() {
-        // WICHTIG: für Jackson!
+        // für Jackson!
     }
 
     public CurrentEnergyResponse(double communityDepleted, double gridPortion) {

@@ -1,4 +1,4 @@
-// usage-service/src/main/java/at/fhtw/energy/model/UsageHour.java
+
 package at.fhtw.energy.model;
 
 import jakarta.persistence.Entity;

@@ -10,7 +10,7 @@ public class HistoricalSummaryResponse {
     private double gridUsed;
 
     public HistoricalSummaryResponse() {
-        // wichtig für JSON-Deserialization
+        // für JSON-Deserialization
     }
 
     public HistoricalSummaryResponse(double communityProduced, double communityUsed, double gridUsed) {

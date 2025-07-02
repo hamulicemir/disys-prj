@@ -17,7 +17,7 @@ public class HistoricalEntryEntity {
     private double gridUsed;
 
     public HistoricalEntryEntity() {
-        // Wichtig für JPA
+        //für JPA
     }
 
     public HistoricalEntryEntity(LocalDateTime hour, double communityProduced, double communityUsed, double gridUsed) {
